@@ -1,3 +1,5 @@
+import { Layer } from '../layer/layer';
+
 export const Drink = ({ id, name, orderd, image, layers }) => {
   return (
     <div className="drink">
@@ -7,15 +9,13 @@ export const Drink = ({ id, name, orderd, image, layers }) => {
         </div>
         <div className="drink__info">
           <h3>{name}</h3>
-          <div className="layer">
-            <div
-              className="layer__color"
-              style={{ backgroundColor: '#613916' }}
-            ></div>
-            <div className="layer__label">espresso</div>
-          </div>
+
+          {layers.map((layer) => (
+            <Layer key={layer.label} color={layer.color} label={layer.label} />
+          ))}
         </div>
       </div>
+
       <form className="drink__controls">
         <input type="hidden" className="order-id" value="0" />
         <button className="order-btn">Objednat</button>
