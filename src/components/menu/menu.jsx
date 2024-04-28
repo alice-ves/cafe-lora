@@ -1,6 +1,12 @@
 import { Drink } from '../drink';
 
-export const Menu = () => {
+const response = await fetch('http://localhost:4000/api/drinks');
+const data = await response.json();
+const drinks = data.data;
+
+console.log(drinks);
+
+export const Menu = ({ drinks }) => {
   return (
     <section id="menu" className="menu">
       <div className="container">
@@ -9,28 +15,15 @@ export const Menu = () => {
           Vyberte si z našeho interaktivního menu a nemusíte čekat na obsluhu
         </p>
         <div className="drinks-list">
-          <div className="drink">
+          {drinks.map((drink) => (
             <Drink
-              id={0}
-              name="Romano"
-              ordered={false}
-              image="http://localhost:4000/assets/cups/romano.png"
-              layers={[
-                {
-                  color: '#fbdf5b',
-                  label: 'citrón',
-                },
-                {
-                  color: '#613916',
-                  label: 'espresso',
-                },
-              ]}
+              id={drink.id}
+              name={drink.name}
+              ordered={drink.ordered}
+              image={`http://localhost:4000${drink.image}`}
+              layers={drink.layers}
             />
-            <form className="drink__controls">
-              <input type="hidden" className="order-id" value="1" />
-              <button className="order-btn">Objednat</button>
-            </form>
-          </div>
+          ))}
         </div>
 
         <div className="order-detail">
