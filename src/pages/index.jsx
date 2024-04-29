@@ -11,12 +11,10 @@ import { Footer } from '../components/Footer/Footer';
 const resp = await fetch('http://localhost:4000/api/drinks');
 const data = await resp.json();
 const drinks = data.data;
-console.log(drinks);
 
 const handleOrder = async (event) => {
   event.preventDefault();
   const drinkId = Number(event.target.dataset.id);
-  console.log(drinkId);
 
   const resp = await fetch(`http://localhost:4000/api/drinks/${drinkId}`, {
     method: 'PATCH',
@@ -37,7 +35,7 @@ const handleOrder = async (event) => {
 
 document.querySelector('#root').innerHTML = render(
   <div className="page">
-    <Header />
+    <Header showMenu={true} />
     <main>
       <Banner />
       <Menu drinks={drinks} />
