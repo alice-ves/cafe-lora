@@ -9,7 +9,7 @@ export const Drink = ({ id, name, ordered, image, layers }) => {
         </div>
         <div className="drink__info">
           <h3>{name}</h3>
-
+          console.log(image);
           {layers.map((layer) => (
             <Layer key={layer.label} color={layer.color} label={layer.label} />
           ))}
